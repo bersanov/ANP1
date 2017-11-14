@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>1350527863_1335321950_1272295594_48400297_rokossovskiy_.jpg</file>
+        <file>livepreview.jpg</file>
+    </qresource>
+</RCC>

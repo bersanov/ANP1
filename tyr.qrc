@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>depositphotos_7716395-stock-photo-mathematical-random-numbers-blue-background.jpg</file>
+    </qresource>
+</RCC>
