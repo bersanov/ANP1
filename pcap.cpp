@@ -91,10 +91,108 @@ void PCAP::on_pushButton_2_clicked()
         ui->textEdit->insertPlainText(" " +s+ " ");
        // qDebug()<<hex<<(ph.data[j]&0xff);
     }
+
+int p = 0;
+    ui->textEdit->append("");
+    ui->textEdit->insertPlainText("Destination MAC-adress:");
+    for (int j = p ; j < 6 ;j++)
+    {
+        QString dec;
+        dec=QString::number(ph.packets[Num].data[j]);
+        int d=dec.toInt();
+        QString s=QString::number(d,16).toUpper();
+
+       if (d < 16)
+            ui->textEdit->insertPlainText(" 0"+s);
+       else
+            ui->textEdit->insertPlainText(" " + s);
+    }
+    p=6;
+    ui->textEdit->append("");
+    ui->textEdit->insertPlainText("Source MAC-adress:");
+    for (int j = p ; j < 12 ;j++)
+    {
+        QString dec;
+        dec=QString::number(ph.packets[Num].data[j]);
+        int d=dec.toInt();
+        QString s=QString::number(d,16).toUpper();
+       if (d < 16)
+            ui->textEdit->insertPlainText(" 0"+s);
+       else
+            ui->textEdit->insertPlainText(" " + s);
+    }
+    p=12;
+    ui->textEdit->append("");
+    ui->textEdit->insertPlainText("Type:");
+    for (int j = p ; j < 14 ;j++)
+    {
+        QString dec;
+        dec=QString::number(ph.packets[Num].data[j]);
+        int d=dec.toInt();
+        QString s=QString::number(d,16).toUpper();
+       if (d < 16)
+            ui->textEdit->insertPlainText(" 0"+s);
+       else
+            ui->textEdit->insertPlainText(" " + s);
+    }
+    p=14;
+    QString dec=QString::number(ph.packets[Num].data[p]);
+    int d=dec.toInt();
+    QString s=QString::number(d,16).toUpper();
+
+    ui->textEdit->append("");
+
+    ui->textEdit->insertPlainText("Length:"+s[1]);
+    int k=s.toInt();
+    k=k%10;
+    k=k*4;
+    k=k-20;
+    p=23;
+    dec=QString::number(ph.packets[Num].data[p]);
+    d=dec.toInt();
+    s=QString::number(d,16).toUpper();
+    ui->textEdit->append("");
+    if (d < 16)
+         ui->textEdit->insertPlainText("Protocol: 0"+ s);
+    else
+         ui->textEdit->insertPlainText("Protocol: " + s);
+
+    p=26;
+    ui->textEdit->append("");
+    ui->textEdit->insertPlainText("Source:");
+    for (int j=p;j<p+4;j++)
+    {
+        ui->textEdit->insertPlainText(QString::number(ph.packets[Num].data[j])+".");
+    }
+
+    p=30;
+    ui->textEdit->append("");
+    ui->textEdit->insertPlainText("Destination:");
+    for (int j=p;j<p+4;j++)
+    {
+        ui->textEdit->insertPlainText(QString::number(ph.packets[Num].data[j])+".");
+    }
+    p=34+k;
+    ui->textEdit->append("");
+    s=QString::number(ph.packets[Num].data[p]);
+    d=s.toInt();
+    s=QString::number(d,16).toUpper();
+    QString z=QString::number(ph.packets[Num].data[p+1]);
+    d=z.toInt();
+    z=QString::number(d,16).toUpper();
+    s=s+z;
+    ui->textEdit->insertPlainText("Source Port:"+s);
+    ui->textEdit->append("");
+    p=36+k;
+    s=QString::number(ph.packets[Num].data[p]);
+    d=s.toInt();
+    s=QString::number(d,16).toUpper();
+    z=QString::number(ph.packets[Num].data[p+1]);
+    d=z.toInt();
+    z=QString::number(d,16).toUpper();
+    s=s+z;
+    ui->textEdit->insertPlainText("Destination Port:"+s);
 }
-
-
-
 
 
 //int main(int argc, char *argv[])
